@@ -1,4 +1,5 @@
 ﻿using MaterialSkin.Controls;
+using Rapha_LIS.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,14 +13,17 @@ using static Guna.UI2.Native.WinApi;
 
 namespace Rapha_LIS.Views
 {
-    public partial class PatientActionView : MaterialForm, IPatientActionView
+    public partial class UserActionView : MaterialForm, IUserActionVIew
     {
         private string message = string.Empty;
         private bool isSuccessful;
         private bool isEdit;
 
+        public event EventHandler? UserSaveRequested;
+        public event EventHandler? UserDeleteRequested;
 
-        public PatientActionView()
+
+        public UserActionView()
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
@@ -29,28 +33,13 @@ namespace Rapha_LIS.Views
         {
             btnSave.Click += (s, e) =>
             {
-                SaveRequested?.Invoke(this, EventArgs.Empty);
+                UserSaveRequested?.Invoke(this, EventArgs.Empty);
             };
 
             btnDelete.Click += (s, e) =>
             {
-                DeleteRequested?.Invoke(this, EventArgs.Empty);
+                UserDeleteRequested?.Invoke(this, EventArgs.Empty);
             };
-
-        }
-
-        private void PatientActionView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2HtmlLabel8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtAge_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -104,13 +93,6 @@ namespace Rapha_LIS.Views
             set { txtContact.Text = value; }
         }
 
-
-        public string? Test
-        {
-            get { return txtTest.Text; }
-            set { txtTest.Text = value; }
-        }
-
         public DateTime Birthdate { get; set; }
 
 
@@ -136,14 +118,12 @@ namespace Rapha_LIS.Views
                 {
                     btnSave.Location = new Point(207, 369);
                     btnDelete.Visible = true;
-                    //btnDelete.Location = new Point(422, 369); // Set your exact location
-                    //btnSave.Location = new Point(199, 369);
                 }
                 else //Edit False
                 {
                     btnSave.Visible = true;
                     btnDelete.Visible = false;
-                    btnSave.Location = new Point(318, 369); // Set your exact location
+                    btnSave.Location = new Point(318, 369); 
                 }
             }
         }
@@ -153,8 +133,6 @@ namespace Rapha_LIS.Views
         public int Id { get; set; }
         public bool DeleteButtonVisible { set { btnDelete.Visible = value; } }
 
-        public event EventHandler? SaveRequested;
-
-        public event EventHandler? DeleteRequested;
+ 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rapha_LIS.Views
 {
-    public interface IPatientActionView
+    public interface IUserActionVIew
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
@@ -19,15 +19,14 @@ namespace Rapha_LIS.Views
         public string? CivilStatus { get; set; }
         public string? Religion { get; set; }
         public string? Contact { get; set; }
-        public string? Test { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         public DateTime DateCreated { get; }
         public bool DeleteButtonVisible { set; }
 
-       
-        event EventHandler? SaveRequested;
-        event EventHandler? DeleteRequested;
+        //event EventHandler? PrintRequested;
+        event EventHandler? UserSaveRequested;
+        event EventHandler? UserDeleteRequested;
     }
 }

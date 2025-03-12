@@ -11,11 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Rapha_LIS.Views
 {
-    public partial class Rapha_LIS : MaterialForm, IUserControlView //IPatientAnalyticsView
+    public partial class Rapha_LIS : MaterialForm, IPatientControlView, IUserControlView
     {
         private bool isEdit;
+        private bool isEditUser;
         public Rapha_LIS()
         {
             InitializeComponent();
@@ -26,18 +28,19 @@ namespace Rapha_LIS.Views
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
             materialSkinManager.ColorScheme = new ColorScheme(
-            (Primary)0xFFFFFF,  // Pure white background
-            (Primary)0xF1F8E9,  // Very light green (subtle medical feel)
-            (Primary)0xC8E6C9,  // Slightly darker green (depth)
-            (Accent)0x66BB6A,   // Soft green accent (natural and calming)
-            TextShade.BLACK     // Black text for contrast
+            (Primary)0xFFFFFF,  // Clean white background
+            (Primary)0xF3E5F5,  // Very light purple for a premium look
+            (Primary)0xCE93D8,  // Soft purple contrast
+            (Accent)0xBA68C8,   // Vibrant purple accent
+            TextShade.BLACK     // Dark text for easy reading
             );
         }
 
-        //IUser Control
+        //Patient Control
 
         private void AssociateAndRaiseViewEvents()
         {
+
 
             btnAddPatient.Click += (s, e) =>
             {
@@ -49,6 +52,18 @@ namespace Rapha_LIS.Views
                 if (e.KeyCode == Keys.Enter)
                     SearchRequestedByName?.Invoke(this, EventArgs.Empty);
             };
+
+            btnAddUser.Click += (s, e) =>
+            {
+                UserAddRequested?.Invoke(this, EventArgs.Empty);
+            };
+
+            txtUserControlSearch.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                    UserSearchRequestedByName?.Invoke(this, EventArgs.Empty);
+            };
+
         }
 
         public bool IsEdit
@@ -63,7 +78,6 @@ namespace Rapha_LIS.Views
             set { txtPatientControlSearch.Text = value; }
         }
 
-        
         private void dgvUserControlPatients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ActionRequested?.Invoke(this, EventArgs.Empty);
@@ -71,28 +85,43 @@ namespace Rapha_LIS.Views
 
         public void BindPatientControlList(BindingSource patientControlList)
         {
-            dgvUserControlPatients.DataSource = patientControlList;
+            dgvPatientControl.DataSource = patientControlList;
         }
 
-        
-        //IAnalyticsView
-        /*public string SearchQueryById
+        //User Control
+
+        public string UserSearchQueryByName
         {
-            get { return txtAnalyticsSearch.Text; }
-            set { txtAnalyticsSearch.Text = value; }
+            get { return txtUserControlSearch.Text; }
+            set { txtUserControlSearch.Text = value; }
         }
 
-        public void BindPatientAnalyticsList(BindingSource patientAnalyticsList)
+        public bool UserIsEdit
         {
-            dgvAnalyticsPatients.DataSource = patientAnalyticsList;
-        }*/
+            get { return isEditUser; }
+            set { isEditUser = value; }
+        }
+        public void BindUserControlList(BindingSource userControlList)
+        {
+            dgvUserControl.DataSource = userControlList;
+        }
 
-        //IPatientAction Eventhandler
+        private void dgvUserControl_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            UserActionRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+
+
+
+        //IPatientControl Eventhandler
         public event EventHandler? SearchRequestedByName;
         public event EventHandler? AddRequested;
         public event EventHandler? ActionRequested;
-        //IAnalytics EventHandler
-        //public event EventHandler? SearchRequestedById;
-        //public event EventHandler? RemovePatientRequested;
+
+        //IUserControlView EventHandler
+        public event EventHandler? UserSearchRequestedByName;
+        public event EventHandler? UserAddRequested;
+        public event EventHandler? UserActionRequested;
     }
 }

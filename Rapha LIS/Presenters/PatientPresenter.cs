@@ -18,8 +18,8 @@ namespace Rapha_LIS.Presenters
     public class PatientPresenter
     {
         //User Control
-        private readonly IUserControlView patientView;
-        private readonly IUserControlRepository patientRepository;
+        private readonly IPatientControlView patientView;
+        private readonly IPatientControlRepository patientRepository;
         private readonly IPatientActionView patientActionView;
         private readonly BindingSource PatientControlBindingSource;
         private IEnumerable<PatientModel>? patientList;
@@ -31,7 +31,7 @@ namespace Rapha_LIS.Presenters
         private List<PatientModel> analyticsList = new List<PatientModel>();*/
 
 
-        public PatientPresenter(IUserControlView patientView, IUserControlRepository patientRepository, IPatientActionView patientActionView
+        public PatientPresenter(IPatientControlView patientView, IPatientControlRepository patientRepository, IPatientActionView patientActionView
                                 /*IAnalyticsRepository analyticsRepository, IPatientAnalyticsView analyticsView*/)
         {
             //PatientControlView
@@ -70,6 +70,7 @@ namespace Rapha_LIS.Presenters
 
         private void LoadAllPatientList()
         {
+            patientActionView.DeleteButtonVisible = patientActionView.IsEdit;
             patientList = patientRepository.GetAll();
             PatientControlBindingSource.DataSource = patientList;
         }
@@ -132,6 +133,7 @@ namespace Rapha_LIS.Presenters
                 }
                 else // Add new patient
                 {
+                    
                     MessageBox.Show("Adding patient..."); // Debugging step
                     patientRepository.AddPatient(patientModel);
                     patientActionView.Message = "Patient added successfully.";
@@ -172,6 +174,7 @@ namespace Rapha_LIS.Presenters
             patientActionView.SaveRequested -= AddPatientView_SaveRequested;
             patientActionView.SaveRequested += AddPatientView_SaveRequested;
 
+            
             ((Form)patientActionView).ShowDialog();
             CleanviewFields();
 

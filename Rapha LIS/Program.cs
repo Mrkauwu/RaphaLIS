@@ -16,21 +16,45 @@ namespace Rapha_LIS
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            
             ApplicationConfiguration.Initialize();
             var config = new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory) // Use BaseDirectory instead
+                .SetBasePath(AppContext.BaseDirectory) 
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
             string? sqlConnectionString = config.GetConnectionString("DefaultConnection");
 
-            IUserControlView patientView = new Rapha_LIS.Views.Rapha_LIS();
+            /*IPatientControlView patientView = new Rapha_LIS.Views.Rapha_LIS();
+            IPatientActionView addPatientView = new PatientActionView();    
+            IPatientControlRepository repository = new PatientRepository(sqlConnectionString ?? "");
+
+            IUserControlView userControlView = new Rapha_LIS.Views.Rapha_LIS();
+            IUserActionVIew userActionVIew = new UserActionView();
+            IUserControlRepository userControlRepository = new UserRepository(sqlConnectionString ?? "");
+
+           new PatientPresenter(patientView, repository, addPatientView);
+           new UserPresenter(userControlView, userControlRepository, userActionVIew);
+            Application.Run((Form)userControlView, patientView);*/
+
+            // Create Main Form
+            var mainForm = new Rapha_LIS.Views.Rapha_LIS(); // This should be your main form
+
+            // Initialize Patient Presenter
+            IPatientControlView patientView = mainForm;
             IPatientActionView addPatientView = new PatientActionView();
-            //IPatientAnalyticsView analyticsView = (IPatientAnalyticsView)patientView;
-            //IAnalyticsRepository analyticsRepository = new PatientRepository(sqlConnectionString);
-            IUserControlRepository repository = new PatientRepository(sqlConnectionString ?? "");
-            new PatientPresenter(patientView, repository, addPatientView/*, analyticsRepository, analyticsView*/);
-            Application.Run((Form)patientView);
+            IPatientControlRepository patientRepository = new PatientRepository(sqlConnectionString ?? "");
+            new PatientPresenter(patientView, patientRepository, addPatientView);
+
+            // Initialize User Presenter
+            IUserControlView userControlView = mainForm;
+            IUserActionVIew userActionView = new UserActionView();
+            IUserControlRepository userControlRepository = new UserRepository(sqlConnectionString ?? "");
+            new UserPresenter(userControlView, userControlRepository, userActionView);
+
+            // Run the application with the main form
+            Application.Run(mainForm);
+
         }
     }
 }

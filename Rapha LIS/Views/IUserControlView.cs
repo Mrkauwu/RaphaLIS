@@ -8,14 +8,14 @@ namespace Rapha_LIS.Views
 {
     public interface IUserControlView
     {
-        string SearchQueryByName { get; set; }
+        string UserSearchQueryByName { get; set; }
 
-        bool IsEdit { get; set; }
+        bool UserIsEdit { get; set; }
 
-        event EventHandler SearchRequestedByName;
-        event EventHandler AddRequested;
-        event EventHandler ActionRequested;
-        void BindPatientControlList(BindingSource patientControlList);
+        event EventHandler UserSearchRequestedByName;
+        event EventHandler UserAddRequested;
+        event EventHandler UserActionRequested;
+        void BindUserControlList(BindingSource userControlList);
         void Show();
     }
 }

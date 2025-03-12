@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Rapha_LIS.Repositories
 {
-    public class PatientRepository : BaseRepository, IUserControlRepository //IAnalyticsRepository
+    public class PatientRepository : BaseRepository, IPatientControlRepository //IAnalyticsRepository
     {
         public PatientRepository(string ConnectionString)
         {
@@ -101,7 +101,6 @@ namespace Rapha_LIS.Repositories
             }
         }
 
-
         public IEnumerable<PatientModel> GetAll()
         {
             var patientList = new List<PatientModel>();
@@ -138,58 +137,6 @@ namespace Rapha_LIS.Repositories
             }
             return patientList;
         }
-
-        public IEnumerable<PatientModel> GetById(string value)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-        /*public IEnumerable<PatientModel> GetById(string value)
-        {
-            var analyticsList = new List<PatientModel>();
-            //string patientName = value;
-            int Id = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
-            using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand())
-            {
-                connection.Open();
-                command.Connection = connection;
-                command.CommandText = @"    
-                                        SELECT * FROM Patients
-                                        WHERE Id = @Id ORDER BY DateCreated DESC";
-                //command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = patientName;
-                command.Parameters.Add("@Id", SqlDbType.NVarChar).Value = Id;
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var patientModel = new PatientModel();
-
-                        //patientModel.Number = Convert.ToInt32(reader["Number"]);
-                        patientModel.Id = Convert.ToInt32(reader["Id"]);
-                        patientModel.FirstName = reader["FirstName"].ToString();
-                        patientModel.LastName = reader["LastName"].ToString();
-                        patientModel.MiddleInitial = reader["MiddleInitial"].ToString();
-                        patientModel.Age = Convert.ToInt32(reader["Age"]);
-                        patientModel.Sex = reader["Sex"].ToString();
-                        patientModel.Birthdate = Convert.ToDateTime(reader["Birthdate"]);
-                        patientModel.Address = reader["Address"].ToString();
-                        patientModel.CivilStatus = reader["CivilStatus"].ToString();
-                        patientModel.Religion = reader["Religion"].ToString();
-                        patientModel.Contact = reader["Contact"].ToString();
-                        patientModel.DateCreated = Convert.ToDateTime(reader["DateCreated"]);
-                        patientModel.Test = reader["Test"].ToString();
-                        patientModel.TestDescription = reader["TestDescription"].ToString();
-                        analyticsList.Add(patientModel);
-                    }
-                }
-            }
-            return analyticsList;
-        }*/
 
         public IEnumerable<PatientModel> GetByName(string value)
         {
@@ -234,81 +181,5 @@ namespace Rapha_LIS.Repositories
             }
             return patientList;
         }
-
-        /*public IEnumerable<PatientModel> GetById(string value)
-        {
-            var analyticsList = new List<PatientModel>();
-            string patientId = value;
-            int Id = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
-            using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand())
-            {
-                connection.Open();
-                command.Connection = connection;
-                command.CommandText = @"SELECT * FROM Patients WHERE Id = @Id";
-                command.Parameters.Add("@Id", SqlDbType.NVarChar).Value = Id;
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var patientModel = new PatientModel();
-                    }
-
-
-        }*/
-
-        /*public IEnumerable<PatientModel> GetById(string value)
-{
-    var analyticsList = new List<PatientModel>();
-    int Id = int.TryParse(value, out int parsedId) ? parsedId : 0;
-
-    using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand())
-
-            //connection.Open();
-            //command.Connection = connection;
-            //using (var command = new SqlCommand(@"SELECT * FROM Patients WHERE Id = @Id"))
-            {
-                //command.Parameters.Add("@Id", SqlDbType.NVarChar).Value = Id; // Change type to Int since Id is an integer
-                connection.Open(); // ✅ Open the connection
-
-                command.Connection = connection; // ✅ Manually set the connection
-                command.CommandText = "SELECT * FROM Patients WHERE Id = @Id";
-                command.Parameters.Add("@Id", SqlDbType.NVarChar).Value = Id;
-
-
-                using (var reader = command.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                var patientModel = new PatientModel
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    FirstName = reader["FirstName"].ToString(),
-                    LastName = reader["LastName"].ToString(),
-                    MiddleInitial = reader["MiddleInitial"].ToString(),
-                    Age = reader.IsDBNull(reader.GetOrdinal("Age")) ? 0 : reader.GetInt32(reader.GetOrdinal("Age")),
-                    Sex = reader["Sex"].ToString(),
-                    Birthdate = reader.IsDBNull(reader.GetOrdinal("Birthdate")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("Birthdate")),
-                    Address = reader["Address"].ToString(),
-                    CivilStatus = reader["CivilStatus"].ToString(),
-                    Religion = reader["Religion"].ToString(),
-                    Contact = reader["Contact"].ToString(),
-                    DateCreated = reader.IsDBNull(reader.GetOrdinal("DateCreated")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("DateCreated")),
-                    Test = reader["Test"].ToString(),
-                    TestDescription = reader["TestDescription"].ToString()
-                };
-
-                analyticsList.Add(patientModel);
-            }
-        }
-    }
-    
-    return analyticsList;
-}*/
-
-
-
     }
 }
