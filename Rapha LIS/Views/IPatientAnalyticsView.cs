@@ -8,11 +8,12 @@ namespace Rapha_LIS.Views
 {
      public interface IPatientAnalyticsView
     {
-        string SearchQueryById { get; set; }
-
-        event EventHandler? SearchRequestedById;
+        string SearchQueryByHIR { get; set; }
+        event EventHandler? SearchRequestedByHIR;
+        event EventHandler? AnalyticsActionRequested;
 
         void BindPatientAnalyticsList(BindingSource patientAnalyticsList);
+        void ShowMessage(string message);
         void Show();
     }
 }

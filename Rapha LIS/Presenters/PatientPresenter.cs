@@ -1,4 +1,5 @@
 ﻿using Rapha_LIS.Models;
+using Rapha_LIS.Repositories;
 using Rapha_LIS.Views;
 using System;
 using System.Collections.Generic;
@@ -17,22 +18,30 @@ namespace Rapha_LIS.Presenters
 {
     public class PatientPresenter
     {
-        //User Control
+        //Analytics
+        private readonly IPatientAnalyticsView patientAnalyticsView;
+        private readonly IAnalyticsRepository analyticsRepository;
+        private readonly IAnalyticsActionView analyticsActionView;
+        private BindingSource analyticsBindingSource;
+        private List<PatientModel> patientHRI;
+
+
+        //Patient Control
         private readonly IPatientControlView patientView;
         private readonly IPatientControlRepository patientRepository;
         private readonly IPatientActionView patientActionView;
         private readonly BindingSource PatientControlBindingSource;
         private IEnumerable<PatientModel>? patientList;
 
-        //Analytics
-        /*private readonly IPatientAnalyticsView analyticsView;
-        private readonly IAnalyticsRepository analyticsRepository;
-        private readonly BindingSource AnalyticsBindingSource;
-        private List<PatientModel> analyticsList = new List<PatientModel>();*/
+        private readonly IPatientResult patientResult;
+        private readonly IPatientResultRepository patientResultRepository;
+        private readonly IResultActionView resultActionView;
+        private readonly BindingSource ResultBindingSource;
+        private IEnumerable<PatientModel>? resultList;
 
-
-        public PatientPresenter(IPatientControlView patientView, IPatientControlRepository patientRepository, IPatientActionView patientActionView
-                                /*IAnalyticsRepository analyticsRepository, IPatientAnalyticsView analyticsView*/)
+        public PatientPresenter(IPatientControlView patientView, IPatientControlRepository patientRepository, IPatientActionView patientActionView,
+                                IPatientAnalyticsView patientAnalyticsView, IAnalyticsRepository analyticsRepository, IAnalyticsActionView analyticsActionView,
+                                IPatientResult patientResult, IPatientResultRepository patientResultRepository, IResultActionView resultActionView)
         {
             //PatientControlView
             this.patientView = patientView ?? throw new ArgumentNullException(nameof(patientView));
@@ -41,10 +50,6 @@ namespace Rapha_LIS.Presenters
             //PatientActionView
             this.patientActionView = patientActionView ?? throw new ArgumentNullException(nameof(patientActionView));
 
-            //PatientAnalyticsView
-            /*this.analyticsRepository = analyticsRepository ?? throw new ArgumentNullException(nameof(analyticsRepository));
-            this.analyticsView = analyticsView ?? throw new ArgumentNullException(nameof(analyticsView));*/
-
             //PatientControlView
             this.patientView.SearchRequestedByName += PatientView_SearchRequestedByName;
             this.patientView.AddRequested += PatientView_AddRequested;
@@ -52,28 +57,242 @@ namespace Rapha_LIS.Presenters
             this.PatientControlBindingSource = new BindingSource();  // ✅ Initialize first
             this.patientView.BindPatientControlList(PatientControlBindingSource);  // ✅ Now it's not null
 
-
             //PatientActionView
             this.patientActionView.SaveRequested += AddPatientView_SaveRequested;
             this.patientActionView.DeleteRequested += PatientActionView_DeleteRequested;
 
-            //IAnalyticsView
-            /*this.analyticsView.SearchRequestedById += AnalyticsView_SearchRequestedById;
-            this.analyticsView.BindPatientAnalyticsList(AnalyticsBindingSource);
-            this.AnalyticsBindingSource = new BindingSource();*/
+            //Analytics
+            this.patientAnalyticsView = patientAnalyticsView ?? throw new ArgumentNullException(nameof(patientAnalyticsView));
+            this.analyticsRepository = analyticsRepository ?? throw new ArgumentNullException(nameof(analyticsRepository));
+            this.analyticsActionView = analyticsActionView ?? throw new ArgumentNullException(nameof(analyticsActionView));
+            this.analyticsBindingSource = new BindingSource();
             
+            patientHRI = analyticsRepository.GetPatientHRI();
+            analyticsBindingSource.DataSource = patientHRI;
+            patientAnalyticsView.BindPatientAnalyticsList(analyticsBindingSource);
+
+            this.patientAnalyticsView.SearchRequestedByHIR += PatientAnalyticsView_SearchRequestedByHIR;
+            this.patientAnalyticsView.AnalyticsActionRequested += PatientAnalyticsView_AnalyticsActionRequested;
+            this.analyticsActionView.AnalyticsSubmitRequested += AnalyticsActionView_AnalyticsSubmitRequested;
+            this.analyticsActionView.AnalyticsSaveRequested += AnalyticsActionView_AnalyticsSaveRequested;
+
+            //Result
+            this.patientResult = patientResult ?? throw new ArgumentNullException(nameof(patientResult));
+            this.patientResultRepository = patientResultRepository ?? throw new ArgumentNullException(nameof(patientResultRepository));
+            this.resultActionView = resultActionView ?? throw new ArgumentNullException(nameof(resultActionView));
+
+            this.patientResult.ResultSearchRequested += PatientResult_ResultSearchRequested;
+            this.patientResult.ResultActionRequested += PatientResult_ResultActionRequested;
+            
+            this.ResultBindingSource = new BindingSource();  // ✅ Initialize first
+            this.patientResult.BindPatientResult(ResultBindingSource);
+
             LoadAllPatientList();
             this.patientView.Show();
         }
 
-        
+        private void PatientResult_ResultActionRequested(object? sender, EventArgs e)
+        {
+            var patientModel = (PatientModel)ResultBindingSource.Current;
+
+            resultActionView.Id = patientModel.Id;
+            resultActionView.FirstName = patientModel.FirstName;
+            resultActionView.LastName = patientModel.LastName;
+            resultActionView.MiddleInitial = patientModel.MiddleInitial;
+            resultActionView.Age = patientModel.Age.ToString();
+            resultActionView.Sex = patientModel.Sex;
+            resultActionView.Birthdate = patientModel.Birthdate;
+            resultActionView.Address = patientModel.Address;
+            resultActionView.CivilStatus = patientModel.CivilStatus;
+            resultActionView.Religion = patientModel.Religion;
+            resultActionView.Contact = patientModel.Contact;
+            resultActionView.Test = patientModel.Test;
+            resultActionView.Result = patientModel.Result;
+
+            resultActionView.IsEdit = true;
+
+            ((Form)resultActionView).ShowDialog();
+            CleanviewFields();
+        }
 
         private void LoadAllPatientList()
         {
             patientActionView.DeleteButtonVisible = patientActionView.IsEdit;
             patientList = patientRepository.GetAll();
             PatientControlBindingSource.DataSource = patientList;
+            patientHRI = analyticsRepository.GetPatientHRI();
+            analyticsBindingSource.DataSource = patientHRI;
+            resultList = patientResultRepository.GetAllPatientResult();
+            ResultBindingSource.DataSource = resultList;
         }
+
+        //Result
+        private void PatientResult_ResultSearchRequested(object? sender, EventArgs e)
+        {
+            bool emptyValue = string.IsNullOrWhiteSpace(this.patientResult.ResultSearchQuery);
+            if (emptyValue == false)
+                resultList = patientResultRepository.GetPatientResultByName(this.patientResult.ResultSearchQuery);
+            else resultList = patientResultRepository.GetAllPatientResult();
+            ResultBindingSource.DataSource = resultList;
+        }
+
+        private void AnalyticsActionView_AnalyticsSubmitRequested(object? sender, EventArgs e)
+        {
+            var patientModel = new PatientModel
+            {
+                Id = analyticsActionView.Id,
+                Result = analyticsActionView.Result
+            };
+
+            try
+            {
+                new Common.ModelDataValidation().Validate(patientModel);
+
+                if (analyticsActionView.IsEdit) // Use IsEdit to check if it's an edit operation
+                {
+                    MessageBox.Show($"HPatient ID: {patientModel.Id}");
+
+                    patientRepository.EditResult(patientModel);
+                    analyticsActionView.Message = "Patient updated successfully.";
+                }
+
+                else // Add new patient
+                {
+
+                    MessageBox.Show("Adding patient..."); // Debugging step
+                    analyticsRepository.AddPatientAnalytics(patientModel);
+                    analyticsActionView.Message = "Patient added successfully.";
+                }
+
+                analyticsActionView.IsSuccessful = true;
+                LoadAllPatientList(); // Refresh the list
+                CleanviewFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message); // Debugging step
+                analyticsActionView.IsSuccessful = false;
+                analyticsActionView.Message = ex.Message;
+            }
+        }
+
+
+
+        private void AnalyticsActionView_AnalyticsSaveRequested(object? sender, EventArgs e)
+        {
+            var patientModel = new PatientModel
+            {
+                Id = analyticsActionView.Id,
+                FirstName = analyticsActionView.FirstName,
+                LastName = analyticsActionView.LastName,
+                MiddleInitial = analyticsActionView.MiddleInitial,
+                Age = int.TryParse(analyticsActionView.Age, out int age) ? age : 0,
+                Sex = analyticsActionView.Sex,
+                Birthdate = analyticsActionView.Birthdate < new DateTime(1753, 1, 1)
+                ? DateTime.Now
+                : analyticsActionView.Birthdate,
+                Address = analyticsActionView.Address,
+                CivilStatus = analyticsActionView.CivilStatus,
+                Religion = analyticsActionView.Religion,
+                Contact = analyticsActionView.Contact,
+                Test = analyticsActionView.Test,
+                DateCreated = DateTime.Now,
+                Result = analyticsActionView.Result
+            };
+
+            try
+            {
+                new Common.ModelDataValidation().Validate(patientModel);
+
+                if (analyticsActionView.IsEdit) // Use IsEdit to check if it's an edit operation
+                {
+                    MessageBox.Show($"HPatient ID: {patientModel.Id}");
+
+                    analyticsRepository.EditPatientAnalytics(patientModel);
+                    analyticsActionView.Message = "Patient updated successfully.";
+                }
+
+                else // Add new patient
+                {
+
+                    MessageBox.Show("Adding patient..."); // Debugging step
+                    analyticsRepository.AddPatientAnalytics(patientModel);
+                    analyticsActionView.Message = "Patient added successfully.";
+                }
+
+                patientActionView.IsSuccessful = true;
+                LoadAllPatientList(); // Refresh the list
+                CleanviewFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message); // Debugging step
+                analyticsActionView.IsSuccessful = false;
+                analyticsActionView.Message = ex.Message;
+            }
+        }
+
+        private void PatientAnalyticsView_AnalyticsActionRequested(object? sender, EventArgs e)
+        {
+
+            var patientModel = (PatientModel)analyticsBindingSource.Current;
+
+            analyticsActionView.Id = patientModel.Id;
+            analyticsActionView.FirstName = patientModel.FirstName;
+            analyticsActionView.LastName = patientModel.LastName;
+            analyticsActionView.MiddleInitial = patientModel.MiddleInitial;
+            analyticsActionView.Age = patientModel.Age.ToString();
+            analyticsActionView.Sex = patientModel.Sex;
+            analyticsActionView.Birthdate = patientModel.Birthdate;
+            analyticsActionView.Address = patientModel.Address;
+            analyticsActionView.CivilStatus = patientModel.CivilStatus;
+            analyticsActionView.Religion = patientModel.Religion;
+            analyticsActionView.Contact = patientModel.Contact;
+            analyticsActionView.Test = patientModel.Test;
+            analyticsActionView.Result = patientModel.Result;
+
+            analyticsActionView.IsEdit = true;
+
+            analyticsActionView.AnalyticsSaveRequested -= AnalyticsActionView_AnalyticsSaveRequested;
+            analyticsActionView.AnalyticsSaveRequested += AnalyticsActionView_AnalyticsSaveRequested;
+
+
+            ((Form)analyticsActionView).ShowDialog();
+            CleanviewFields();
+        }
+
+        //Analytics
+        private void PatientAnalyticsView_SearchRequestedByHIR(object? sender, EventArgs e)
+        {
+            string inputId = patientAnalyticsView.SearchQueryByHIR.Trim();
+            if (string.IsNullOrWhiteSpace(inputId))
+            {
+                patientAnalyticsView.ShowMessage("Please enter a User ID.");
+                return;
+            }
+            if (int.TryParse(patientAnalyticsView.SearchQueryByHIR, out int userId))
+            {
+                var user = analyticsRepository.GetPatientByHRI(userId);
+                if (user != null)
+                {
+                    MessageBox.Show("Hoy");
+                    analyticsRepository.AddPatientAnalytics(user); // Save to SearchHistory DB
+                    patientHRI.Add(user); // Add to local history
+                    analyticsBindingSource.ResetBindings(false); // Refresh UI
+                    patientAnalyticsView.BindPatientAnalyticsList(analyticsBindingSource);
+                }
+                else
+                {
+                    patientAnalyticsView.ShowMessage("User not found!");
+                }
+            }
+            else
+            {
+                patientAnalyticsView.ShowMessage("Invalid User ID!");
+            }
+        }
+
+        
 
         private void CleanviewFields()
         {
@@ -195,26 +414,5 @@ namespace Rapha_LIS.Presenters
             else patientList = patientRepository.GetAll();
             PatientControlBindingSource.DataSource = patientList;
         }
-
-
-        //Patient Analytics View
-        /*private void AnalyticsView_SearchRequestedById(object? sender, EventArgs e)
-        {
-            //analyticsList = analyticsRepository.GetById(this.analyticsView.SearchQueryById); 
-
-            //string query = analyticsView.SearchQueryById;
-
-            // Get patients from repository
-            IEnumerable<PatientModel> result = analyticsRepository.GetById(analyticsView.SearchQueryById);
-            
-            analyticsList.AddRange(result);
-
-            AnalyticsBindingSource.DataSource = null;
-            AnalyticsBindingSource.DataSource = analyticsList;
-        }*/
-
-        
-
-
     }
 }

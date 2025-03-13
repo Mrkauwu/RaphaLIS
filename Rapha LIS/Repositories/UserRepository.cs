@@ -1,4 +1,4 @@
-﻿using LiveChartsCore.Painting;
+﻿
 using Microsoft.Data.SqlClient;
 using MVP_LEARNING.Repositories;
 using Rapha_LIS.Models;

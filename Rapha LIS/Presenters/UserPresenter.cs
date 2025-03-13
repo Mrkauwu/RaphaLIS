@@ -37,11 +37,7 @@ namespace Rapha_LIS.Presenters
             this.userActionVIew.UserSaveRequested += UserActionVIew_UserSaveRequested;
             this.userActionVIew.UserDeleteRequested += UserActionVIew_UserDeleteRequested;
 
-            //IAnalyticsView
-            /*this.analyticsView.SearchRequestedById += AnalyticsView_SearchRequestedById;
-            this.analyticsView.BindPatientAnalyticsList(AnalyticsBindingSource);
-            this.AnalyticsBindingSource = new BindingSource();*/
-
+            
             LoadAllPatientList();
             this.userControlView.Show();
         }

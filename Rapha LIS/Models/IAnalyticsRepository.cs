@@ -8,6 +8,9 @@ namespace Rapha_LIS.Models
 {
     public interface IAnalyticsRepository
     {
-        IEnumerable<PatientModel> GetById(string value);
+        PatientModel? GetPatientByHRI(int patientId);
+        void AddPatientAnalytics(PatientModel patientModel);
+        void EditPatientAnalytics(PatientModel patientModel);
+        List<PatientModel> GetPatientHRI();
     }
 }

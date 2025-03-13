@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Rapha_LIS));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -44,36 +46,51 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             imageList1 = new ImageList(components);
             tabPage6 = new TabPage();
+            dataGridView1 = new DataGridView();
             tabPage5 = new TabPage();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            txtSearchPatientResult = new Guna.UI2.WinForms.Guna2TextBox();
+            dgvPatientResult = new DataGridView();
+            guna2DateTimePicker3 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             tabPage4 = new TabPage();
             dgvAnalyticsPatients = new DataGridView();
-            txtAnalyticsSearch = new TextBox();
+            lblAnalytics = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            txtAnalyticsSearch = new Guna.UI2.WinForms.Guna2TextBox();
+            guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             userTabPage = new TabPage();
             dgvUserControl = new DataGridView();
+            lblUserControl = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtUserControlSearch = new Guna.UI2.WinForms.Guna2TextBox();
             guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             btnAddUser = new Guna.UI2.WinForms.Guna2Button();
             patientTabPage = new TabPage();
+            dgvPatientControl = new DataGridView();
+            lblPatientControl = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtPatientControlSearch = new Guna.UI2.WinForms.Guna2TextBox();
             btnAddPatient = new Guna.UI2.WinForms.Guna2Button();
             dtpDateCreated = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            dgvPatientControl = new DataGridView();
             tabPage1 = new TabPage();
-            materialButton2 = new MaterialSkin.Controls.MaterialButton();
-            materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
-            materialButton1 = new MaterialSkin.Controls.MaterialButton();
             materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+            tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPatientResult).BeginInit();
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAnalyticsPatients).BeginInit();
             userTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUserControl).BeginInit();
             patientTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPatientControl).BeginInit();
-            tabPage1.SuspendLayout();
             materialTabControl1.SuspendLayout();
             SuspendLayout();
             // 
@@ -91,6 +108,7 @@
             // 
             // tabPage6
             // 
+            tabPage6.Controls.Add(dataGridView1);
             tabPage6.ImageKey = "Settings.png";
             tabPage6.Location = new Point(4, 31);
             tabPage6.Name = "tabPage6";
@@ -99,8 +117,68 @@
             tabPage6.Text = "Settings";
             tabPage6.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(128, 255, 128);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Blue;
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.BackgroundColor = Color.DimGray;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeight = 4;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 128, 128);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.Blue;
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.FromArgb(206, 147, 216);
+            dataGridView1.Location = new Point(3, 206);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(255, 128, 128);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(68, 88, 112);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(255, 128, 128);
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.ScrollBars = ScrollBars.Vertical;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(1360, 477);
+            dataGridView1.TabIndex = 6;
+            // 
             // tabPage5
             // 
+            tabPage5.Controls.Add(guna2HtmlLabel1);
+            tabPage5.Controls.Add(txtSearchPatientResult);
+            tabPage5.Controls.Add(dgvPatientResult);
+            tabPage5.Controls.Add(guna2DateTimePicker3);
             tabPage5.ImageKey = "Result.png";
             tabPage5.Location = new Point(4, 31);
             tabPage5.Name = "tabPage5";
@@ -109,10 +187,89 @@
             tabPage5.Text = "Results";
             tabPage5.UseVisualStyleBackColor = true;
             // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("SansSerif", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            guna2HtmlLabel1.Location = new Point(568, 23);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(237, 39);
+            guna2HtmlLabel1.TabIndex = 16;
+            guna2HtmlLabel1.Text = "Patients Result";
+            // 
+            // txtSearchPatientResult
+            // 
+            txtSearchPatientResult.Anchor = AnchorStyles.None;
+            txtSearchPatientResult.Animated = true;
+            txtSearchPatientResult.BorderColor = Color.FromArgb(243, 229, 245);
+            txtSearchPatientResult.BorderRadius = 6;
+            txtSearchPatientResult.BorderThickness = 2;
+            txtSearchPatientResult.CustomizableEdges = customizableEdges1;
+            txtSearchPatientResult.DefaultText = "";
+            txtSearchPatientResult.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtSearchPatientResult.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtSearchPatientResult.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtSearchPatientResult.DisabledState.PlaceholderForeColor = Color.Silver;
+            txtSearchPatientResult.FocusedState.BorderColor = Color.FromArgb(206, 147, 216);
+            txtSearchPatientResult.Font = new Font("Segoe UI", 9F);
+            txtSearchPatientResult.ForeColor = Color.FromArgb(68, 88, 112);
+            txtSearchPatientResult.HoverState.BorderColor = Color.FromArgb(206, 147, 216);
+            txtSearchPatientResult.Location = new Point(369, 83);
+            txtSearchPatientResult.Name = "txtSearchPatientResult";
+            txtSearchPatientResult.PlaceholderForeColor = Color.Silver;
+            txtSearchPatientResult.PlaceholderText = "Search Patient";
+            txtSearchPatientResult.SelectedText = "";
+            txtSearchPatientResult.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtSearchPatientResult.Size = new Size(547, 40);
+            txtSearchPatientResult.TabIndex = 15;
+            txtSearchPatientResult.TabStop = false;
+            // 
+            // dgvPatientResult
+            // 
+            dgvPatientResult.AllowUserToAddRows = false;
+            dgvPatientResult.AllowUserToDeleteRows = false;
+            dgvPatientResult.AllowUserToResizeColumns = false;
+            dgvPatientResult.AllowUserToResizeRows = false;
+            dgvPatientResult.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvPatientResult.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPatientResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvPatientResult.BackgroundColor = Color.White;
+            dgvPatientResult.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPatientResult.Location = new Point(3, 206);
+            dgvPatientResult.Name = "dgvPatientResult";
+            dgvPatientResult.Size = new Size(1360, 477);
+            dgvPatientResult.TabIndex = 17;
+            dgvPatientResult.CellDoubleClick += dgvPatientResult_CellDoubleClick;
+            // 
+            // guna2DateTimePicker3
+            // 
+            guna2DateTimePicker3.Anchor = AnchorStyles.None;
+            guna2DateTimePicker3.BackColor = Color.White;
+            guna2DateTimePicker3.BorderColor = Color.FromArgb(206, 147, 216);
+            guna2DateTimePicker3.BorderRadius = 6;
+            guna2DateTimePicker3.BorderThickness = 1;
+            guna2DateTimePicker3.Checked = true;
+            guna2DateTimePicker3.CustomizableEdges = customizableEdges3;
+            guna2DateTimePicker3.FillColor = Color.White;
+            guna2DateTimePicker3.FocusedColor = Color.FromArgb(206, 147, 216);
+            guna2DateTimePicker3.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker3.ForeColor = Color.FromArgb(68, 88, 112);
+            guna2DateTimePicker3.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker3.Location = new Point(979, 83);
+            guna2DateTimePicker3.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker3.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker3.Name = "guna2DateTimePicker3";
+            guna2DateTimePicker3.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2DateTimePicker3.Size = new Size(251, 36);
+            guna2DateTimePicker3.TabIndex = 14;
+            guna2DateTimePicker3.Value = new DateTime(2025, 3, 12, 21, 36, 35, 491);
+            // 
             // tabPage4
             // 
             tabPage4.Controls.Add(dgvAnalyticsPatients);
+            tabPage4.Controls.Add(lblAnalytics);
             tabPage4.Controls.Add(txtAnalyticsSearch);
+            tabPage4.Controls.Add(guna2DateTimePicker2);
             tabPage4.ImageKey = "Analytics.png";
             tabPage4.Location = new Point(4, 31);
             tabPage4.Name = "tabPage4";
@@ -123,23 +280,85 @@
             // 
             // dgvAnalyticsPatients
             // 
+            dgvAnalyticsPatients.AllowUserToAddRows = false;
+            dgvAnalyticsPatients.AllowUserToDeleteRows = false;
+            dgvAnalyticsPatients.AllowUserToResizeColumns = false;
+            dgvAnalyticsPatients.AllowUserToResizeRows = false;
+            dgvAnalyticsPatients.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvAnalyticsPatients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvAnalyticsPatients.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvAnalyticsPatients.BackgroundColor = Color.White;
             dgvAnalyticsPatients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAnalyticsPatients.Dock = DockStyle.Bottom;
-            dgvAnalyticsPatients.Location = new Point(0, 214);
+            dgvAnalyticsPatients.Location = new Point(6, 203);
             dgvAnalyticsPatients.Name = "dgvAnalyticsPatients";
-            dgvAnalyticsPatients.Size = new Size(1372, 472);
-            dgvAnalyticsPatients.TabIndex = 1;
+            dgvAnalyticsPatients.Size = new Size(1360, 477);
+            dgvAnalyticsPatients.TabIndex = 18;
+            dgvAnalyticsPatients.CellDoubleClick += dgvAnalyticsPatients_CellDoubleClick;
+            // 
+            // lblAnalytics
+            // 
+            lblAnalytics.BackColor = Color.Transparent;
+            lblAnalytics.Font = new Font("SansSerif", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            lblAnalytics.Location = new Point(554, 23);
+            lblAnalytics.Name = "lblAnalytics";
+            lblAnalytics.Size = new Size(264, 39);
+            lblAnalytics.TabIndex = 15;
+            lblAnalytics.Text = "Patient Analytics";
             // 
             // txtAnalyticsSearch
             // 
-            txtAnalyticsSearch.Location = new Point(309, 60);
+            txtAnalyticsSearch.Anchor = AnchorStyles.None;
+            txtAnalyticsSearch.Animated = true;
+            txtAnalyticsSearch.BorderColor = Color.FromArgb(243, 229, 245);
+            txtAnalyticsSearch.BorderRadius = 6;
+            txtAnalyticsSearch.BorderThickness = 2;
+            txtAnalyticsSearch.CustomizableEdges = customizableEdges5;
+            txtAnalyticsSearch.DefaultText = "";
+            txtAnalyticsSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtAnalyticsSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtAnalyticsSearch.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtAnalyticsSearch.DisabledState.PlaceholderForeColor = Color.Silver;
+            txtAnalyticsSearch.FocusedState.BorderColor = Color.FromArgb(206, 147, 216);
+            txtAnalyticsSearch.Font = new Font("Segoe UI", 9F);
+            txtAnalyticsSearch.ForeColor = Color.FromArgb(68, 88, 112);
+            txtAnalyticsSearch.HoverState.BorderColor = Color.FromArgb(206, 147, 216);
+            txtAnalyticsSearch.Location = new Point(369, 83);
             txtAnalyticsSearch.Name = "txtAnalyticsSearch";
-            txtAnalyticsSearch.Size = new Size(100, 23);
-            txtAnalyticsSearch.TabIndex = 0;
+            txtAnalyticsSearch.PlaceholderForeColor = Color.Silver;
+            txtAnalyticsSearch.PlaceholderText = "Enter HRI";
+            txtAnalyticsSearch.SelectedText = "";
+            txtAnalyticsSearch.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtAnalyticsSearch.Size = new Size(547, 40);
+            txtAnalyticsSearch.TabIndex = 14;
+            txtAnalyticsSearch.TabStop = false;
+            // 
+            // guna2DateTimePicker2
+            // 
+            guna2DateTimePicker2.Anchor = AnchorStyles.None;
+            guna2DateTimePicker2.BackColor = Color.White;
+            guna2DateTimePicker2.BorderColor = Color.FromArgb(206, 147, 216);
+            guna2DateTimePicker2.BorderRadius = 6;
+            guna2DateTimePicker2.BorderThickness = 1;
+            guna2DateTimePicker2.Checked = true;
+            guna2DateTimePicker2.CustomizableEdges = customizableEdges7;
+            guna2DateTimePicker2.FillColor = Color.White;
+            guna2DateTimePicker2.FocusedColor = Color.FromArgb(206, 147, 216);
+            guna2DateTimePicker2.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker2.ForeColor = Color.FromArgb(68, 88, 112);
+            guna2DateTimePicker2.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker2.Location = new Point(979, 83);
+            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
+            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2DateTimePicker2.Size = new Size(251, 36);
+            guna2DateTimePicker2.TabIndex = 13;
+            guna2DateTimePicker2.Value = new DateTime(2025, 3, 12, 21, 36, 35, 491);
             // 
             // userTabPage
             // 
             userTabPage.Controls.Add(dgvUserControl);
+            userTabPage.Controls.Add(lblUserControl);
             userTabPage.Controls.Add(txtUserControlSearch);
             userTabPage.Controls.Add(guna2DateTimePicker1);
             userTabPage.Controls.Add(btnAddUser);
@@ -154,39 +373,29 @@
             // dgvUserControl
             // 
             dgvUserControl.AllowUserToAddRows = false;
+            dgvUserControl.AllowUserToDeleteRows = false;
+            dgvUserControl.AllowUserToResizeColumns = false;
+            dgvUserControl.AllowUserToResizeRows = false;
             dgvUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUserControl.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUserControl.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvUserControl.BackgroundColor = Color.White;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(68, 88, 112);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(206, 147, 216);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvUserControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvUserControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUserControl.GridColor = Color.FromArgb(206, 147, 216);
             dgvUserControl.Location = new Point(6, 203);
-            dgvUserControl.MultiSelect = false;
             dgvUserControl.Name = "dgvUserControl";
-            dgvUserControl.ReadOnly = true;
-            dgvUserControl.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(206, 147, 216);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(68, 88, 112);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(206, 147, 216);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvUserControl.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgvUserControl.RowHeadersVisible = false;
-            dgvUserControl.ScrollBars = ScrollBars.Vertical;
-            dgvUserControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUserControl.Size = new Size(1360, 477);
-            dgvUserControl.TabIndex = 12;
+            dgvUserControl.TabIndex = 16;
             dgvUserControl.CellDoubleClick += dgvUserControl_CellDoubleClick;
+            // 
+            // lblUserControl
+            // 
+            lblUserControl.BackColor = Color.Transparent;
+            lblUserControl.Font = new Font("SansSerif", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            lblUserControl.Location = new Point(546, 23);
+            lblUserControl.Name = "lblUserControl";
+            lblUserControl.Size = new Size(281, 39);
+            lblUserControl.TabIndex = 13;
+            lblUserControl.Text = "User Management";
             // 
             // txtUserControlSearch
             // 
@@ -195,7 +404,7 @@
             txtUserControlSearch.BorderColor = Color.FromArgb(243, 229, 245);
             txtUserControlSearch.BorderRadius = 6;
             txtUserControlSearch.BorderThickness = 2;
-            txtUserControlSearch.CustomizableEdges = customizableEdges1;
+            txtUserControlSearch.CustomizableEdges = customizableEdges9;
             txtUserControlSearch.DefaultText = "";
             txtUserControlSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtUserControlSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -210,7 +419,7 @@
             txtUserControlSearch.PlaceholderForeColor = Color.Silver;
             txtUserControlSearch.PlaceholderText = "Search User";
             txtUserControlSearch.SelectedText = "";
-            txtUserControlSearch.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtUserControlSearch.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtUserControlSearch.Size = new Size(547, 40);
             txtUserControlSearch.TabIndex = 11;
             txtUserControlSearch.TabStop = false;
@@ -223,7 +432,7 @@
             guna2DateTimePicker1.BorderRadius = 6;
             guna2DateTimePicker1.BorderThickness = 1;
             guna2DateTimePicker1.Checked = true;
-            guna2DateTimePicker1.CustomizableEdges = customizableEdges3;
+            guna2DateTimePicker1.CustomizableEdges = customizableEdges11;
             guna2DateTimePicker1.FillColor = Color.White;
             guna2DateTimePicker1.FocusedColor = Color.FromArgb(206, 147, 216);
             guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
@@ -233,7 +442,7 @@
             guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2DateTimePicker1.Size = new Size(251, 36);
             guna2DateTimePicker1.TabIndex = 10;
             guna2DateTimePicker1.Value = new DateTime(2025, 3, 12, 21, 36, 35, 491);
@@ -246,7 +455,7 @@
             btnAddUser.BorderColor = Color.FromArgb(206, 147, 216);
             btnAddUser.BorderRadius = 6;
             btnAddUser.BorderThickness = 1;
-            btnAddUser.CustomizableEdges = customizableEdges5;
+            btnAddUser.CustomizableEdges = customizableEdges13;
             btnAddUser.DisabledState.BorderColor = Color.DarkGray;
             btnAddUser.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAddUser.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -260,17 +469,18 @@
             btnAddUser.Location = new Point(142, 83);
             btnAddUser.Name = "btnAddUser";
             btnAddUser.PressedColor = Color.FromArgb(206, 147, 216);
-            btnAddUser.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnAddUser.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btnAddUser.Size = new Size(164, 36);
             btnAddUser.TabIndex = 9;
             btnAddUser.Text = "Add User";
             // 
             // patientTabPage
             // 
+            patientTabPage.Controls.Add(dgvPatientControl);
+            patientTabPage.Controls.Add(lblPatientControl);
             patientTabPage.Controls.Add(txtPatientControlSearch);
             patientTabPage.Controls.Add(btnAddPatient);
             patientTabPage.Controls.Add(dtpDateCreated);
-            patientTabPage.Controls.Add(dgvPatientControl);
             patientTabPage.ImageKey = "Patient Management.png";
             patientTabPage.Location = new Point(4, 31);
             patientTabPage.Name = "patientTabPage";
@@ -280,6 +490,33 @@
             patientTabPage.Text = "Patient Control";
             patientTabPage.UseVisualStyleBackColor = true;
             // 
+            // dgvPatientControl
+            // 
+            dgvPatientControl.AllowUserToAddRows = false;
+            dgvPatientControl.AllowUserToDeleteRows = false;
+            dgvPatientControl.AllowUserToResizeColumns = false;
+            dgvPatientControl.AllowUserToResizeRows = false;
+            dgvPatientControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvPatientControl.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPatientControl.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvPatientControl.BackgroundColor = Color.White;
+            dgvPatientControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPatientControl.Location = new Point(3, 206);
+            dgvPatientControl.Name = "dgvPatientControl";
+            dgvPatientControl.Size = new Size(1360, 477);
+            dgvPatientControl.TabIndex = 17;
+            dgvPatientControl.CellDoubleClick += dgvUserControlPatients_CellDoubleClick;
+            // 
+            // lblPatientControl
+            // 
+            lblPatientControl.BackColor = Color.Transparent;
+            lblPatientControl.Font = new Font("SansSerif", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            lblPatientControl.Location = new Point(527, 23);
+            lblPatientControl.Name = "lblPatientControl";
+            lblPatientControl.Size = new Size(318, 39);
+            lblPatientControl.TabIndex = 14;
+            lblPatientControl.Text = "Patient Management";
+            // 
             // txtPatientControlSearch
             // 
             txtPatientControlSearch.Anchor = AnchorStyles.None;
@@ -287,7 +524,7 @@
             txtPatientControlSearch.BorderColor = Color.FromArgb(243, 229, 245);
             txtPatientControlSearch.BorderRadius = 6;
             txtPatientControlSearch.BorderThickness = 2;
-            txtPatientControlSearch.CustomizableEdges = customizableEdges7;
+            txtPatientControlSearch.CustomizableEdges = customizableEdges15;
             txtPatientControlSearch.DefaultText = "";
             txtPatientControlSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPatientControlSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -302,7 +539,7 @@
             txtPatientControlSearch.PlaceholderForeColor = Color.Silver;
             txtPatientControlSearch.PlaceholderText = "Search Patient";
             txtPatientControlSearch.SelectedText = "";
-            txtPatientControlSearch.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtPatientControlSearch.ShadowDecoration.CustomizableEdges = customizableEdges16;
             txtPatientControlSearch.Size = new Size(547, 40);
             txtPatientControlSearch.TabIndex = 9;
             txtPatientControlSearch.TabStop = false;
@@ -315,7 +552,7 @@
             btnAddPatient.BorderColor = Color.FromArgb(206, 147, 216);
             btnAddPatient.BorderRadius = 6;
             btnAddPatient.BorderThickness = 1;
-            btnAddPatient.CustomizableEdges = customizableEdges9;
+            btnAddPatient.CustomizableEdges = customizableEdges17;
             btnAddPatient.DisabledState.BorderColor = Color.DarkGray;
             btnAddPatient.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAddPatient.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -329,7 +566,7 @@
             btnAddPatient.Location = new Point(142, 83);
             btnAddPatient.Name = "btnAddPatient";
             btnAddPatient.PressedColor = Color.FromArgb(206, 147, 216);
-            btnAddPatient.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnAddPatient.ShadowDecoration.CustomizableEdges = customizableEdges18;
             btnAddPatient.Size = new Size(164, 36);
             btnAddPatient.TabIndex = 8;
             btnAddPatient.Text = "Add Patient";
@@ -342,7 +579,7 @@
             dtpDateCreated.BorderRadius = 6;
             dtpDateCreated.BorderThickness = 1;
             dtpDateCreated.Checked = true;
-            dtpDateCreated.CustomizableEdges = customizableEdges11;
+            dtpDateCreated.CustomizableEdges = customizableEdges19;
             dtpDateCreated.FillColor = Color.White;
             dtpDateCreated.FocusedColor = Color.FromArgb(206, 147, 216);
             dtpDateCreated.Font = new Font("Segoe UI", 9F);
@@ -352,53 +589,13 @@
             dtpDateCreated.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtpDateCreated.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpDateCreated.Name = "dtpDateCreated";
-            dtpDateCreated.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            dtpDateCreated.ShadowDecoration.CustomizableEdges = customizableEdges20;
             dtpDateCreated.Size = new Size(251, 36);
             dtpDateCreated.TabIndex = 7;
             dtpDateCreated.Value = new DateTime(2025, 3, 12, 21, 36, 35, 491);
             // 
-            // dgvPatientControl
-            // 
-            dgvPatientControl.AllowUserToAddRows = false;
-            dgvPatientControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvPatientControl.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPatientControl.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgvPatientControl.BackgroundColor = Color.White;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(68, 88, 112);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(206, 147, 216);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvPatientControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dgvPatientControl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPatientControl.GridColor = Color.FromArgb(206, 147, 216);
-            dgvPatientControl.Location = new Point(6, 203);
-            dgvPatientControl.MultiSelect = false;
-            dgvPatientControl.Name = "dgvPatientControl";
-            dgvPatientControl.ReadOnly = true;
-            dgvPatientControl.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(206, 147, 216);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(68, 88, 112);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(206, 147, 216);
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvPatientControl.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dgvPatientControl.RowHeadersVisible = false;
-            dgvPatientControl.ScrollBars = ScrollBars.Vertical;
-            dgvPatientControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPatientControl.Size = new Size(1360, 477);
-            dgvPatientControl.TabIndex = 2;
-            dgvPatientControl.CellDoubleClick += dgvUserControlPatients_CellDoubleClick;
-            // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(materialButton2);
-            tabPage1.Controls.Add(materialTextBox1);
-            tabPage1.Controls.Add(materialButton1);
             tabPage1.ImageKey = "Dashboard.png";
             tabPage1.Location = new Point(4, 31);
             tabPage1.Name = "tabPage1";
@@ -407,61 +604,6 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Dashboard";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // materialButton2
-            // 
-            materialButton2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton2.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton2.Depth = 0;
-            materialButton2.HighEmphasis = true;
-            materialButton2.Icon = null;
-            materialButton2.Location = new Point(701, 146);
-            materialButton2.Margin = new Padding(4, 6, 4, 6);
-            materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton2.Name = "materialButton2";
-            materialButton2.NoAccentTextColor = Color.Empty;
-            materialButton2.Size = new Size(158, 36);
-            materialButton2.TabIndex = 2;
-            materialButton2.Text = "materialButton2";
-            materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton2.UseAccentColor = false;
-            materialButton2.UseVisualStyleBackColor = true;
-            // 
-            // materialTextBox1
-            // 
-            materialTextBox1.AnimateReadOnly = false;
-            materialTextBox1.BorderStyle = BorderStyle.None;
-            materialTextBox1.Depth = 0;
-            materialTextBox1.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialTextBox1.LeadingIcon = null;
-            materialTextBox1.Location = new Point(541, 138);
-            materialTextBox1.MaxLength = 50;
-            materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
-            materialTextBox1.Multiline = false;
-            materialTextBox1.Name = "materialTextBox1";
-            materialTextBox1.Size = new Size(100, 50);
-            materialTextBox1.TabIndex = 1;
-            materialTextBox1.Text = "";
-            materialTextBox1.TrailingIcon = null;
-            // 
-            // materialButton1
-            // 
-            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton1.Depth = 0;
-            materialButton1.HighEmphasis = true;
-            materialButton1.Icon = null;
-            materialButton1.Location = new Point(355, 138);
-            materialButton1.Margin = new Padding(4, 6, 4, 6);
-            materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton1.Name = "materialButton1";
-            materialButton1.NoAccentTextColor = Color.Empty;
-            materialButton1.Size = new Size(158, 36);
-            materialButton1.TabIndex = 0;
-            materialButton1.Text = "materialButton1";
-            materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton1.UseAccentColor = false;
-            materialButton1.UseVisualStyleBackColor = true;
             // 
             // materialTabControl1
             // 
@@ -495,15 +637,20 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Rapha LIS";
             WindowState = FormWindowState.Maximized;
+            tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPatientResult).EndInit();
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAnalyticsPatients).EndInit();
             userTabPage.ResumeLayout(false);
+            userTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUserControl).EndInit();
             patientTabPage.ResumeLayout(false);
+            patientTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPatientControl).EndInit();
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
             materialTabControl1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -514,22 +661,28 @@
         private TabPage tabPage6;
         private TabPage tabPage5;
         private TabPage tabPage4;
-        private DataGridView dgvAnalyticsPatients;
-        private TextBox txtAnalyticsSearch;
         private TabPage userTabPage;
         private TabPage patientTabPage;
         private Guna.UI2.WinForms.Guna2TextBox txtPatientControlSearch;
         private Guna.UI2.WinForms.Guna2Button btnAddPatient;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpDateCreated;
-        private DataGridView dgvPatientControl;
         private TabPage tabPage1;
         private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
-        private MaterialSkin.Controls.MaterialButton materialButton2;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox1;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
         private Guna.UI2.WinForms.Guna2Button btnAddUser;
         private Guna.UI2.WinForms.Guna2TextBox txtUserControlSearch;
         private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private Guna.UI2.WinForms.Guna2TextBox txtAnalyticsSearch;
+        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblUserControl;
         private DataGridView dgvUserControl;
+        private DataGridView dataGridView1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblPatientControl;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAnalytics;
+        private DataGridView dgvPatientControl;
+        private DataGridView dgvPatientResult;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2TextBox txtSearchPatientResult;
+        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker3;
+        private DataGridView dgvAnalyticsPatients;
     }
 }

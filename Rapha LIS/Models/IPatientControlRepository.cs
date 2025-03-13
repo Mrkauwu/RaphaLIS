@@ -11,6 +11,7 @@ namespace Rapha_LIS.Models
         void AddPatient(PatientModel patientModel);
         void EditPatient(PatientModel patientModel);
         void DeletePatient(int Id);
+        void EditResult(PatientModel patientModel);
         IEnumerable<PatientModel> GetAll();
         IEnumerable<PatientModel> GetByName(string value);
     }

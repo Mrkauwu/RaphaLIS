@@ -44,7 +44,18 @@ namespace Rapha_LIS
             IPatientControlView patientView = mainForm;
             IPatientActionView addPatientView = new PatientActionView();
             IPatientControlRepository patientRepository = new PatientRepository(sqlConnectionString ?? "");
-            new PatientPresenter(patientView, patientRepository, addPatientView);
+            //Analytics
+            IPatientAnalyticsView patientAnalyticsView = mainForm;
+            IAnalyticsActionView analyticsActionView = new AnalyticsActionView();
+            IAnalyticsRepository analyticsRepository = new PatientRepository(sqlConnectionString ?? "");
+            //Result
+            IPatientResult patientResult = mainForm;
+            IResultActionView resultActionView = new ResultActionView();
+            IPatientResultRepository patientResultRepository = new PatientRepository(sqlConnectionString ?? "");
+
+            
+            new PatientPresenter(patientView, patientRepository, addPatientView, patientAnalyticsView, analyticsRepository,
+                                  analyticsActionView, patientResult, patientResultRepository, resultActionView);
 
             // Initialize User Presenter
             IUserControlView userControlView = mainForm;

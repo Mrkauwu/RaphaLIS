@@ -14,10 +14,11 @@ using System.Windows.Forms;
 
 namespace Rapha_LIS.Views
 {
-    public partial class Rapha_LIS : MaterialForm, IPatientControlView, IUserControlView
+    public partial class Rapha_LIS : MaterialForm, IPatientControlView, IUserControlView, IPatientAnalyticsView, IPatientResult
     {
         private bool isEdit;
         private bool isEditUser;
+        private bool isEditResult;
         public Rapha_LIS()
         {
             InitializeComponent();
@@ -34,14 +35,16 @@ namespace Rapha_LIS.Views
             (Accent)0xBA68C8,   // Vibrant purple accent
             TextShade.BLACK     // Dark text for easy reading
             );
+            lblUserControl.Font = new Font(lblUserControl.Font.FontFamily, 24, FontStyle.Regular);
+            lblPatientControl.Font = new Font(lblUserControl.Font.FontFamily, 24, FontStyle.Regular);
+            lblAnalytics.Font = new Font(lblUserControl.Font.FontFamily, 24, FontStyle.Regular);
         }
 
         //Patient Control
 
         private void AssociateAndRaiseViewEvents()
         {
-
-
+            //PatientControl TabPage
             btnAddPatient.Click += (s, e) =>
             {
                 AddRequested?.Invoke(this, EventArgs.Empty);
@@ -53,6 +56,7 @@ namespace Rapha_LIS.Views
                     SearchRequestedByName?.Invoke(this, EventArgs.Empty);
             };
 
+            //User Control TabPage
             btnAddUser.Click += (s, e) =>
             {
                 UserAddRequested?.Invoke(this, EventArgs.Empty);
@@ -64,6 +68,18 @@ namespace Rapha_LIS.Views
                     UserSearchRequestedByName?.Invoke(this, EventArgs.Empty);
             };
 
+            //Analytics TabPage
+            txtAnalyticsSearch.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                    SearchRequestedByHIR?.Invoke(this, EventArgs.Empty);
+            };
+            //Result Tabpage
+            txtSearchPatientResult.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                    ResultSearchRequested?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         public bool IsEdit
@@ -85,6 +101,7 @@ namespace Rapha_LIS.Views
 
         public void BindPatientControlList(BindingSource patientControlList)
         {
+
             dgvPatientControl.DataSource = patientControlList;
         }
 
@@ -101,6 +118,7 @@ namespace Rapha_LIS.Views
             get { return isEditUser; }
             set { isEditUser = value; }
         }
+
         public void BindUserControlList(BindingSource userControlList)
         {
             dgvUserControl.DataSource = userControlList;
@@ -111,10 +129,51 @@ namespace Rapha_LIS.Views
             UserActionRequested?.Invoke(this, EventArgs.Empty);
         }
 
+        public string SearchQueryByHIR
+        {
+            get { return txtAnalyticsSearch.Text; }
+            set { txtAnalyticsSearch.Text = value; }
+        }
 
+        public void BindPatientAnalyticsList(BindingSource patientAnalyticsList)
+        {
+            dgvAnalyticsPatients.DataSource = patientAnalyticsList;
+        }
 
+        public void ShowMessage(string message)
+        {
+            MessageBox.Show(message);
+        }
 
-        //IPatientControl Eventhandler
+        private void dgvAnalyticsPatients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            AnalyticsActionRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        //Patient Result
+        public string ResultSearchQuery
+        {
+            get { return txtSearchPatientResult.Text; }
+            set { txtSearchPatientResult.Text = value; }
+        }
+
+        public bool EditResult
+        {
+            get { return isEditResult; }
+            set { isEditResult = value; }
+        }
+
+        public void BindPatientResult(BindingSource resultBindingSource)
+        {
+            dgvPatientResult.DataSource = resultBindingSource;
+        }
+
+        private void dgvPatientResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ResultActionRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        //IPatientControlView Eventhandler
         public event EventHandler? SearchRequestedByName;
         public event EventHandler? AddRequested;
         public event EventHandler? ActionRequested;
@@ -123,5 +182,13 @@ namespace Rapha_LIS.Views
         public event EventHandler? UserSearchRequestedByName;
         public event EventHandler? UserAddRequested;
         public event EventHandler? UserActionRequested;
+
+        //IPatientAnalyticsView EventHandler
+        public event EventHandler? SearchRequestedByHIR;
+        public event EventHandler? AnalyticsActionRequested;
+
+        //IPatientResult EventHandler
+        public event EventHandler? ResultSearchRequested;
+        public event EventHandler? ResultActionRequested;
     }
 }
