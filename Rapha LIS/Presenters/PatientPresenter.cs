@@ -180,7 +180,7 @@ namespace Rapha_LIS.Presenters
 
         private void AnalyticsActionView_AnalyticsSaveRequested(object? sender, EventArgs e)
         {
-            var patientModel = new PatientModel
+            var patientModel = new AnalyticsPatientModel
             {
                 Id = analyticsActionView.Id,
                 FirstName = analyticsActionView.FirstName,
@@ -212,13 +212,7 @@ namespace Rapha_LIS.Presenters
                     analyticsActionView.Message = "Patient updated successfully.";
                 }
 
-                else // Add new patient
-                {
 
-                    MessageBox.Show("Adding patient..."); // Debugging step
-                    analyticsRepository.AddPatientAnalytics(patientModel);
-                    analyticsActionView.Message = "Patient added successfully.";
-                }
 
                 patientActionView.IsSuccessful = true;
                 LoadAllPatientList(); // Refresh the list

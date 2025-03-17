@@ -10,7 +10,7 @@ namespace Rapha_LIS.Models
     {
         PatientModel? GetPatientByHRI(int patientId);
         void AddPatientAnalytics(PatientModel patientModel);
-        void EditPatientAnalytics(PatientModel patientModel);
+        void EditPatientAnalytics(AnalyticsPatientModel patientModel);
         List<PatientModel> GetPatientHRI();
     }
 }

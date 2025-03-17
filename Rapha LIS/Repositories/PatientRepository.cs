@@ -83,7 +83,7 @@ namespace Rapha_LIS.Repositories
         }
 
 
-        public void EditPatientAnalytics(PatientModel patientModel)
+        public void EditPatientAnalytics(AnalyticsPatientModel patientModel)
         {
             var existingPatient = _context.AnalyticsPatients
         .AsNoTracking()
