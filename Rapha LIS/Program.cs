@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Rapha_LIS.Data;
 using Rapha_LIS.Models;
 using Rapha_LIS.Presenters;
 using Rapha_LIS.Repositories;
@@ -16,56 +20,77 @@ namespace Rapha_LIS
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            
+
             ApplicationConfiguration.Initialize();
             var config = new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory) 
+                .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
-            string? sqlConnectionString = config.GetConnectionString("DefaultConnection");
+            var builder = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
 
-            /*IPatientControlView patientView = new Rapha_LIS.Views.Rapha_LIS();
-            IPatientActionView addPatientView = new PatientActionView();    
-            IPatientControlRepository repository = new PatientRepository(sqlConnectionString ?? "");
+                    // Register Database Context
+                    services.AddDbContext<AppDbContext>(options =>
+                        options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
-            IUserControlView userControlView = new Rapha_LIS.Views.Rapha_LIS();
-            IUserActionVIew userActionVIew = new UserActionView();
-            IUserControlRepository userControlRepository = new UserRepository(sqlConnectionString ?? "");
+                    // Register Repositories
+                    services.AddTransient<IPatientControlRepository, PatientRepository>();
+                    services.AddTransient<IAnalyticsRepository, PatientRepository>();
+                    services.AddTransient<IPatientResultRepository, PatientRepository>();
+                    services.AddTransient<IUserControlRepository, UserRepository>();
 
-           new PatientPresenter(patientView, repository, addPatientView);
-           new UserPresenter(userControlView, userControlRepository, userActionVIew);
-            Application.Run((Form)userControlView, patientView);*/
+                    // Register Views
+                    services.AddTransient<IUserActionVIew, UserActionView>();
+                    services.AddTransient<IPatientActionView, PatientActionView>();
+                    services.AddTransient<IAnalyticsActionView, AnalyticsActionView>();
+                    services.AddTransient<IResultActionView, ResultActionView>();
+                    // Register a single instance of the main form for all related interfaces
+                    services.AddSingleton<Rapha_LIS.Views.Rapha_LIS>();
+                    services.AddSingleton<IPatientControlView>(provider => provider.GetRequiredService<Rapha_LIS.Views.Rapha_LIS>());
+                    services.AddSingleton<IUserControlView>(provider => provider.GetRequiredService<Rapha_LIS.Views.Rapha_LIS>());
+                    services.AddSingleton<IPatientAnalyticsView>(provider => provider.GetRequiredService<Rapha_LIS.Views.Rapha_LIS>());
+                    services.AddSingleton<IPatientResult>(provider => provider.GetRequiredService<Rapha_LIS.Views.Rapha_LIS>());
 
-            // Create Main Form
-            var mainForm = new Rapha_LIS.Views.Rapha_LIS(); // This should be your main form
 
-            // Initialize Patient Presenter
-            IPatientControlView patientView = mainForm;
-            IPatientActionView addPatientView = new PatientActionView();
-            IPatientControlRepository patientRepository = new PatientRepository(sqlConnectionString ?? "");
-            //Analytics
-            IPatientAnalyticsView patientAnalyticsView = mainForm;
-            IAnalyticsActionView analyticsActionView = new AnalyticsActionView();
-            IAnalyticsRepository analyticsRepository = new PatientRepository(sqlConnectionString ?? "");
-            //Result
-            IPatientResult patientResult = mainForm;
-            IResultActionView resultActionView = new ResultActionView();
-            IPatientResultRepository patientResultRepository = new PatientRepository(sqlConnectionString ?? "");
+                    // Register Presenters
+                    services.AddTransient<PatientPresenter>();
+                    services.AddTransient<UserPresenter>();
+                })
+                .Build();
 
-            
-            new PatientPresenter(patientView, patientRepository, addPatientView, patientAnalyticsView, analyticsRepository,
-                                  analyticsActionView, patientResult, patientResultRepository, resultActionView);
+            using (var scope = builder.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
 
-            // Initialize User Presenter
-            IUserControlView userControlView = mainForm;
-            IUserActionVIew userActionView = new UserActionView();
-            IUserControlRepository userControlRepository = new UserRepository(sqlConnectionString ?? "");
-            new UserPresenter(userControlView, userControlRepository, userActionView);
+                // Resolve dependencies from the service provider
+                var mainForm = services.GetRequiredService<IPatientControlView>();
+                var patientRepo = services.GetRequiredService<IPatientControlRepository>();
+                var addPatientView = services.GetRequiredService<IPatientActionView>();
+                var patientAnalyticsView = (IPatientAnalyticsView)mainForm;
+                var analyticsRepo = services.GetRequiredService<IAnalyticsRepository>();
+                var analyticsActionView = services.GetRequiredService<IAnalyticsActionView>();
+                var patientResult = (IPatientResult)mainForm;
+                var patientResultRepo = services.GetRequiredService<IPatientResultRepository>();
+                var resultActionView = services.GetRequiredService<IResultActionView>();
 
-            // Run the application with the main form
-            Application.Run(mainForm);
+                // Initialize Patient Presenter
+                new PatientPresenter(mainForm, patientRepo, addPatientView, patientAnalyticsView, analyticsRepo,
+                                     analyticsActionView, patientResult, patientResultRepo, resultActionView);
 
+                // Initialize User Presenter
+                var userControlView = services.GetRequiredService<IUserControlView>();
+                var userControlRepo = services.GetRequiredService<IUserControlRepository>();
+                var userActionView = services.GetRequiredService<IUserActionVIew>();
+
+                new UserPresenter(userControlView, userControlRepo, userActionView);
+
+                // Run the application with the main form
+                Application.Run((Form)mainForm);
+
+
+            }
         }
     }
 }

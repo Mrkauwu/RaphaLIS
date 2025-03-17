@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Rapha_LIS.Models
 {
     public class UserModel
     {
+        [Key]
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -19,6 +21,6 @@ namespace Rapha_LIS.Models
         public string? CivilStatus { get; set; }
         public string? Religion { get; set; }
         public string? Contact { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 }
